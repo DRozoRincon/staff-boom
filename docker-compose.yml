@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        APP_ENV: local
+    environment:
+      - APP_ENV=local
+    volumes:
+      - ./src/:/var/www/html/:cached
+      - ./conect/:/conect/:cached
+
+  db_maria:
+    image: mariadb:10.5.13@sha256:5de92aeb70c440cf8622f391a08299281be870961c84a8450e037507ff0b283a
+    environment:
+      MARIADB_ROOT_PASSWORD: jobs_laravel
+    ports:
+      - 3307:3306
+    volumes:
+      - mariadb:/var/lib/mysql
+
+volumes:
+  files:
+  cdn:
+  generated:
+  mariadb:
+  mongodb:
